@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços de Marmoraria | Imperium Marmoraria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --black: #000000; --black-light: #1a1a1a; --white: #ffffff; --gray: #444444; --border-radius: 10px; }
+        body { background-color: var(--black); color: var(--white); font-family: 'Roboto', sans-serif; margin: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; box-sizing: border-box; }
+        header .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            transition: 0.4s;
+        }
+
+        header.scrolled { 
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 0;
+            height: 80px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 25px;
+            transition: 0.4s;
+        }
+
+        header.scrolled .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--white) !important;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background-color: var(--black);
+            z-index: 1001;
+            padding: 80px 40px;
+            transition: 0.4s;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 30px;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            nav { display: none; }
+            .mobile-toggle { display: block; }
+        }
+
+        h1 { color: var(--gold); text-align: center; margin: 120px 0 60px;  }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .service-card { 
+            position: relative; 
+            height: 400px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 40px; 
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(212, 175, 55, 1); border-radius: var(--border-radius); box-shadow: none;
+            transition: 0.5s;
+        }
+        .service-card:hover { transform: translateY(-10px); }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+            transition: 0.5s;
+        }
+        .service-card:hover::before { background: rgba(0,0,0,0.5); }
+        .service-content { position: relative; z-index: 2; }
+        .service-card h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.8rem;  }
+        .service-card p { color: var(--white); margin-bottom: 30px; line-height: 1.6; }
+        .btn-gold { display: inline-block; padding: 12px 30px; background: var(--gold); color: #000 !important; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; border-radius: var(--border-radius); }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 100; overflow: hidden; transition: 0.4s; }
+        .whatsapp-float img { width: 100%; height: 100%; object-fit: contain; width: 100%; height: 100%; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="src/images/logo/logo.png" alt="Imperium Marmoraria Logo">
+                <span class="logo-text">Imperium</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="projetos.html">Projetos</a></li>
+                    <li><a href="materiais.html">Materiais</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span>☰</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="materiais.html">Materiais</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </div>
+
+
+    <div class="container">
+        <h1>Nossos Serviços</h1>
+        <div class="services-grid">
+            <div class="service-card" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80')">
+                <div class="service-content">
+                    <h3>Bancadas e Ilhas</h3>
+                    <p>Cozinhas gourmet planejadas com o mais alto padrão em mármores e quartzitos.</p>
+                    <a href="https://wa.me/5535999035588" class="btn-gold">Solicitar Orçamento</a>
+                </div>
+            </div>
+            <div class="service-card" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80')">
+                <div class="service-content">
+                    <h3>Lavatórios</h3>
+                    <p>Banheiros e lavabos transformados em ambientes de puro luxo e relaxamento.</p>
+                    <a href="https://wa.me/5535999035588" class="btn-gold">Solicitar Orçamento</a>
+                </div>
+            </div>
+            <div class="service-card" style="background-image: url('https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=800&q=80')">
+                <div class="service-content">
+                    <h3>Escadas</h3>
+                    <p>Revestimentos de escadas que unem segurança, durabilidade e beleza arquitetônica.</p>
+                    <a href="https://wa.me/5535999035588" class="btn-gold">Solicitar Orçamento</a>
+                </div>
+            </div>
+            <div class="service-card" style="background-image: url('https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=800&q=80')">
+                <div class="service-content">
+                    <h3>Áreas Gourmet</h3>
+                    <p>Espaços de lazer completos com pedras resistentes ao calor e às intempéries.</p>
+                    <a href="https://wa.me/5535999035588" class="btn-gold">Solicitar Orçamento</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 Imperium Marmoraria. Todos os direitos reservados.</footer>
+    <a href="https://wa.me/5535999035588" class="whatsapp-float" target="_blank">
+        <img src="/__l5e/assets-v1/36773e5e-b45c-46f0-8067-3ae192dc1f9d/whatsapp_official.svg" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu
+        const toggle = document.getElementById('mobile-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const overlay = document.getElementById('overlay');
+
+        toggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
+
+</body>
+</html>

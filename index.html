@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperium Marmoraria | Mármores e Granitos em Andradas MG</title>
+    <meta name="description" content="A Imperium Marmoraria oferece o melhor em mármores, granitos, quartzo e quartzitos em Andradas - MG. Projetos sob medida com acabamento premium e sofisticação.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-dark: #B8860B;
+            --black: #000000;
+            --black-light: #1a1a1a;
+            --white: #ffffff;
+            --gray: #444444;
+            --gray-light: #F0F0F0;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --border-radius: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo-text {
+            
+        }
+
+        /* Reusable Components */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: #000 !important;
+            border-radius: var(--border-radius);
+        }
+
+        .btn-gold:hover {
+            background-color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent; border: none; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-radius: 50%;
+            border: 1px solid var(--white); border-radius: var(--border-radius);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--black);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        header.scrolled { 
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 0;
+            height: 80px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 25px;
+            transition: var(--transition);
+        }
+
+        header.scrolled .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--white) !important;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('src/images/hero/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #CCC;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        /* Sections */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white);
+        }
+
+        .section-title .divider {
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 0 auto 20px;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--black-light);
+            border: 1px solid rgba(0,0,0,0.05); border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+
+        .feature-card p {
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+
+        /* Materials Preview */
+        .materials-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .material-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .material-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; width: 100%; height: 100%;
+            transition: var(--transition);
+        }
+
+        .material-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .material-card:hover .material-overlay {
+            opacity: 1;
+        }
+
+        .material-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('src/images/hero/hero-bg.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            padding: 80px 0 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links li a {
+            color: #AAA;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links li a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .contact-info p {
+            color: #AAA;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: #BBB;
+            font-size: 0.8rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: transparent; border: none; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: none;
+            z-index: 999;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .whatsapp-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; width: 100%; height: 100%;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: rgba(0,0,0,0.1);
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background-color: var(--black);
+            z-index: 1001;
+            padding: 80px 40px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 30px;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            nav { display: none; }
+            .mobile-toggle { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-btns { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; }
+            .section-title h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="src/images/logo/logo.png" alt="Imperium Marmoraria Logo">
+                <span class="logo-text">Imperium</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="projetos.html">Projetos</a></li>
+                    <li><a href="materiais.html">Materiais</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span>☰</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="materiais.html">Materiais</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Elegância e <span>Precisão</span></h1>
+                <p>Mármores, granitos e superfícies de alto padrão. Unindo estética, funcionalidade e acabamento premium para o seu projeto.</p>
+                <div class="hero-btns">
+                    <a href="https://wa.me/5535999035588" class="btn btn-gold">Solicitar Orçamento</a>
+                    <a href="projetos.html" class="btn btn-outline">Ver Projetos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossa Essência</h2>
+                <div class="divider"></div>
+                <p>A Imperium Marmoraria é dedicada a transformar espaços com a nobreza das pedras naturais e a inovação das superfícies tecnológicas.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Acabamento Premium</h3>
+                    <p>Precisão milimétrica e polimento impecável em cada detalhe do seu projeto.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Materiais Selecionados</h3>
+                    <p>Trabalhamos apenas com as melhores chapas de mármores, granitos e quartzitos.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Projetos Sob Medida</h3>
+                    <p>Execução personalizada para cozinhas, banheiros, escadas e áreas gourmet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background-color: var(--black-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Materiais</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="materials-preview">
+                <div class="material-card">
+                    <img src="src/images/materiais/marmore.jpg" alt="Mármores">
+                    <div class="material-overlay">
+                        <h3>Mármores</h3>
+                        <p>Atemporalidade e sofisticação para ambientes internos.</p>
+                        <a href="materiais.html" class="btn btn-gold" style="padding: 10px 20px; font-size: 0.7rem;">Saber Mais</a>
+                    </div>
+                </div>
+                <div class="material-card">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Granitos">
+                    <div class="material-overlay">
+                        <h3>Granitos</h3>
+                        <p>Resistência e versatilidade para diversas aplicações.</p>
+                        <a href="materiais.html" class="btn btn-gold" style="padding: 10px 20px; font-size: 0.7rem;">Saber Mais</a>
+                    </div>
+                </div>
+                <div class="material-card">
+                    <img src="https://images.unsplash.com/photo-1556911223-e1539266bda7?auto=format&fit=crop&w=800&q=80" alt="Quartzo">
+                    <div class="material-overlay">
+                        <h3>Quartzo</h3>
+                        <p>Inovação e cores sólidas para projetos modernos.</p>
+                        <a href="materiais.html" class="btn btn-gold" style="padding: 10px 20px; font-size: 0.7rem;">Saber Mais</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="materiais.html" class="btn btn-outline">Ver Todos os Materiais</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding cta-section">
+        <div class="container">
+            <h2>Seu projeto merece um acabamento à altura.</h2>
+            <p style="margin: 20px 0 40px; color: #CCC;">Fale agora com nossos especialistas e solicite um orçamento personalizado.</p>
+            <a href="https://wa.me/5535999035588" class="btn btn-gold">Chamar no WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px;">
+                        <span class="logo-text">Imperium</span>
+                    </a>
+                    <p style="color: #AAA; font-size: 0.85rem;">Sofisticação e precisão em mármores e granitos em Andradas - MG e região.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="servicos.html">Serviços</a></li>
+                        <li><a href="projetos.html">Projetos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Serviços</h4>
+                    <ul class="footer-links">
+                        <li><a href="servicos.html">Bancadas</a></li>
+                        <li><a href="servicos.html">Escadas</a></li>
+                        <li><a href="servicos.html">Áreas Gourmet</a></li>
+                        <li><a href="servicos.html">Projetos Sob Medida</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <div class="contact-info">
+                        <p>📍 Rua Amélia Mesquita, 468, Andradas - MG</p>
+                        <p>📱 (35) 99903-5588</p>
+                        <p>📸 @granitosimperium_</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imperium Marmoraria. Todos os direitos reservados. | Imagens Demonstrativas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5535999035588" class="whatsapp-float" target="_blank">
+        <img src="/__l5e/assets-v1/36773e5e-b45c-46f0-8067-3ae192dc1f9d/whatsapp_official.svg" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu
+        const toggle = document.getElementById('mobile-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const overlay = document.getElementById('overlay');
+
+        toggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Smooth Appearance on Scroll (Simple version)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .material-card, .section-title').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

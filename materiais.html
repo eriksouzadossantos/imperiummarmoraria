@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiais | Imperium Marmoraria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --black: #000000; 
+            --black-light: #1a1a1a; 
+            --white: #ffffff; 
+            --gray: #444444; 
+            --border-radius: 10px;
+            --transition: all 0.3s ease;
+        }
+        body { background-color: var(--black); color: var(--white); font-family: 'Roboto', sans-serif; margin: 0; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; box-sizing: border-box; }
+        header .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        header.scrolled { 
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 0;
+            height: 80px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 25px;
+            transition: var(--transition);
+        }
+
+        header.scrolled .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--white) !important;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background-color: var(--black);
+            z-index: 1001;
+            padding: 80px 40px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 30px;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            nav { display: none; }
+            .mobile-toggle { display: block; }
+        }
+
+
+        h1 { color: var(--gold); text-align: center; margin: 120px 0 30px; font-size: 2.5rem; text-transform: none; letter-spacing: 3px; }
+        
+        .filter-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .material-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .item { 
+            background: var(--black-light); 
+            border: 1px solid rgba(212, 175, 55, 0.1); 
+            border-radius: var(--border-radius); 
+            overflow: hidden; 
+            transition: var(--transition);
+        }
+        .item:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .item img { width: 100%; height: 250px; object-fit: contain; width: 100%; height: 100%; }
+        .item-info { padding: 20px; text-align: center; }
+        .item-info h3 { color: var(--gold); margin: 0 0 10px; font-size: 1.1rem; }
+        .item-info p { color: #AAA; font-size: 0.9rem; margin: 0; }
+        
+        footer { 
+            text-align: center; padding: 80px 0 40px; color: #AAA; font-size: 0.8rem; 
+            border-top: 1px solid rgba(212, 175, 55, 0.1); margin-top: 100px;
+        }
+        .whatsapp-float { 
+            position: fixed; bottom: 30px; right: 30px; background: #25D366; 
+            width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; z-index: 100;
+            box-shadow: none; transition: var(--transition);
+            overflow: hidden;
+        }
+        .whatsapp-float img { width: 100%; height: 100%; object-fit: contain; width: 100%; height: 100%; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="src/images/logo/logo.png" alt="Imperium Marmoraria Logo">
+                <span class="logo-text">Imperium</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="projetos.html">Projetos</a></li>
+                    <li><a href="materiais.html">Materiais</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span>☰</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="materiais.html">Materiais</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </div>
+
+
+    <div class="container">
+        <h1>Nossos Materiais</h1>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterMaterials('all')">Tudo</button>
+            <button class="filter-btn" onclick="filterMaterials('granitos')">Granitos</button>
+            <button class="filter-btn" onclick="filterMaterials('marmores')">Mármores</button>
+            <button class="filter-btn" onclick="filterMaterials('quartzo')">Quartzo</button>
+            <button class="filter-btn" onclick="filterMaterials('quartizito')">Quartzito</button>
+        </div>
+
+        <div class="material-grid" id="materialGrid">
+            <!-- Granitos -->
+            <div class="item" data-category="granitos">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Granito Marrom Tabaco">
+                <div class="item-info"><h3>Granito Marrom Tabaco</h3><p>Elegância e durabilidade para ambientes modernos.</p></div>
+            </div>
+            <div class="item" data-category="granitos">
+                <img src="https://images.unsplash.com/photo-1597047388125-998f48483f8b?auto=format&fit=crop&w=600&q=80" alt="Granito Vermelho Brasília">
+                <div class="item-info"><h3>Granito Vermelho Brasília</h3><p>Cor intensa e marcante com alta resistência.</p></div>
+            </div>
+            <div class="item" data-category="granitos">
+                <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=600&q=80" alt="Granito Preto São Gabriel">
+                <div class="item-info"><h3>Granito Preto São Gabriel</h3><p>Clássico absoluto, versátil e atemporal.</p></div>
+            </div>
+
+            <!-- Mármores -->
+            <div class="item" data-category="marmores">
+                <img src="src/images/materiais/marmore.jpg" alt="Mármore Branco Comum">
+                <div class="item-info"><h3>Mármore Branco Comum</h3><p>Clássico e atemporal para revestimentos nobres.</p></div>
+            </div>
+            <div class="item" data-category="marmores">
+                <img src="https://images.unsplash.com/photo-1600573472592-33967876cd69?auto=format&fit=crop&w=600&q=80" alt="Mármore Carrara">
+                <div class="item-info"><h3>Mármore Carrara</h3><p>A máxima sofisticação vinda da Itália.</p></div>
+            </div>
+            <div class="item" data-category="marmores">
+                <img src="https://images.unsplash.com/photo-1604709177225-c4266396f4e3?auto=format&fit=crop&w=600&q=80" alt="Mármore Nero Marquina">
+                <div class="item-info"><h3>Mármore Nero Marquina</h3><p>Luxo em tons escuros com veios brancos marcantes.</p></div>
+            </div>
+
+            <!-- Quartzo -->
+            <div class="item" data-category="quartzo">
+                <img src="https://images.unsplash.com/photo-1628594796039-b9d9f056d33f?auto=format&fit=crop&w=600&q=80" alt="Quartzo Branco Estelar">
+                <div class="item-info"><h3>Quartzo Branco Estelar</h3><p>Tecnologia e brilho com fácil manutenção.</p></div>
+            </div>
+            <div class="item" data-category="quartzo">
+                <img src="https://images.unsplash.com/photo-1505576391880-b3f9d713dc4f?auto=format&fit=crop&w=600&q=80" alt="Quartzo Cinza Absoluto">
+                <div class="item-info"><h3>Quartzo Cinza Absoluto</h3><p>Minimalismo e uniformidade para projetos contemporâneos.</p></div>
+            </div>
+
+            <!-- Quartzito -->
+            <div class="item" data-category="quartizito">
+                <img src="https://images.unsplash.com/photo-1588854337236-6889d631faa8?auto=format&fit=crop&w=600&q=80" alt="Quartzito Taj Mahal">
+                <div class="item-info"><h3>Quartzito Taj Mahal</h3><p>A beleza do mármore com a dureza do granito.</p></div>
+            </div>
+            <div class="item" data-category="quartizito">
+                <img src="https://images.unsplash.com/photo-1615873968403-89e068629275?auto=format&fit=crop&w=600&q=80" alt="Quartzito Perla Santana">
+                <div class="item-info"><h3>Quartzito Perla Santana</h3><p>Resistência extrema e padrões naturais exuberantes.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Imperium Marmoraria. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.7rem;">📍 Rua Amélia Mesquita, 468, Andradas - MG</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5535999035588" class="whatsapp-float" target="_blank">
+        <img src="/__l5e/assets-v1/36773e5e-b45c-46f0-8067-3ae192dc1f9d/whatsapp_official.svg" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu
+        const toggle = document.getElementById('mobile-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const overlay = document.getElementById('overlay');
+
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+
+        function filterMaterials(category) {
+
+            const items = document.querySelectorAll('.item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.display = 'none', 300);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
