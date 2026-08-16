@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperium Marmoraria | Mármores e Granitos em Andradas MG</title>
     <meta name="description" content="A Imperium Marmoraria oferece o melhor em mármores, granitos, quartzo e quartzitos em Andradas - MG. Projetos sob medida com acabamento premium e sofisticação.">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,25 +39,27 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .logo-text {
-            
-        }
-
         /* Reusable Components */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 40px;
         }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
         }
 
         .section-padding {
             padding: 100px 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
         }
 
         .btn {
@@ -72,29 +74,31 @@
             transition: var(--transition);
             cursor: pointer;
             border: none;
+            text-align: center;
         }
 
         .btn-gold {
             background-color: var(--gold);
             color: #000 !important;
-            border-radius: var(--border-radius);
         }
 
         .btn-gold:hover {
             background-color: var(--black);
+            color: var(--white) !important;
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
 
         .btn-outline {
-            background-color: transparent; border: none; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-radius: 50%;
-            border: 1px solid var(--white); border-radius: var(--border-radius);
+            background-color: transparent;
+            border: 1px solid var(--white);
             color: var(--white);
         }
 
         .btn-outline:hover {
-            background-color: var(--black);
-            color: var(--white);
+            background-color: var(--gold);
+            border-color: var(--gold);
+            color: #000 !important;
             transform: translateY(-3px);
         }
 
@@ -105,20 +109,33 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 0;
             height: 100px;
             display: flex;
-            justify-content: center;
+            align-items: center;
             transition: var(--transition);
         }
 
         header.scrolled { 
             background-color: rgba(0, 0, 0, 0.95);
-            padding: 0;
             height: 80px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
 
+        @media (max-width: 768px) {
+            header {
+                height: 70px;
+            }
+            header.scrolled {
+                height: 70px;
+            }
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
         .logo {
             display: flex;
@@ -129,16 +146,18 @@
 
         .logo img {
             height: 50px;
-            margin-right: 25px;
+            margin-right: 15px;
             transition: var(--transition);
         }
 
-        header.scrolled .logo img {
-            height: 50px;
+        @media (max-width: 768px) {
+            .logo img {
+                height: 40px;
+            }
         }
 
         .logo-text {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             letter-spacing: 2px;
             font-weight: 700;
             color: var(--gold);
@@ -147,7 +166,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 40px;
+            gap: clamp(15px, 3vw, 40px);
         }
 
         nav ul li a {
@@ -167,8 +186,15 @@
         .mobile-toggle {
             display: none;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            padding: 10px;
+            z-index: 1002;
+        }
+
+        @media (max-width: 992px) {
+            nav { display: none; }
+            .mobile-toggle { display: block; }
         }
 
         /* Hero */
@@ -194,10 +220,12 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             margin-bottom: 20px;
             letter-spacing: 5px;
             color: var(--white);
+            line-height: 1.1;
+            font-weight: 700;
         }
 
         .hero h1 span {
@@ -205,17 +233,29 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
             color: #CCC;
-            max-width: 700px;
-            margin: 0 auto 40px;
+            max-width: 800px;
+            margin: 0 auto 50px;
             font-weight: 300;
         }
 
         .hero-btns {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 300px;
+            }
         }
 
         /* Sections */
@@ -294,7 +334,7 @@
         .material-card img {
             width: 100%;
             height: 100%;
-            object-fit: contain; width: 100%; height: 100%;
+            object-fit: cover; width: 100%; height: 100%;
             transition: var(--transition);
         }
 
@@ -395,28 +435,35 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: transparent; border: none; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-radius: 50%;
-            width: 80px;
-            height: 80px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: white !important;
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            box-shadow: none;
-            z-index: 999;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
             transition: var(--transition);
-            overflow: hidden;
-        }
-
-        .whatsapp-float img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; width: 100%; height: 100%;
+            text-decoration: none;
         }
 
         .whatsapp-float:hover {
+            background-color: #128c7e;
             transform: scale(1.1);
-            background-color: rgba(0,0,0,0.1);
+            color: white !important;
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 30px;
+            }
         }
 
         /* Mobile Menu */
@@ -424,12 +471,15 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 80%;
+            width: 280px;
             height: 100vh;
-            background-color: var(--black);
+            background-color: var(--black-light);
             z-index: 1001;
-            padding: 80px 40px;
+            padding: 100px 40px;
             transition: var(--transition);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
         }
 
         .mobile-nav.active {
@@ -441,16 +491,21 @@
         }
 
         .mobile-nav ul li {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .mobile-nav ul li a {
-            color: var(--gold);
+            color: var(--white);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--gold);
         }
 
         .overlay {
@@ -502,7 +557,7 @@
                 </ul>
             </nav>
             <div class="mobile-toggle" id="mobile-toggle">
-                <span>☰</span>
+                <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
@@ -567,7 +622,7 @@
             
             <div class="materials-preview">
                 <div class="material-card">
-                    <img src="src/images/materiais/marmore.jpg" alt="Mármores">
+                    <img src="/__l5e/assets-v1/25b98d5a-a26a-4751-8b5d-097e6b5441a4/Marmores.webp" alt="Mármores">
                     <div class="material-overlay">
                         <h3>Mármores</h3>
                         <p>Atemporalidade e sofisticação para ambientes internos.</p>
@@ -575,7 +630,7 @@
                     </div>
                 </div>
                 <div class="material-card">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Granitos">
+                    <img src="/__l5e/assets-v1/aa2ea031-5b04-435a-bd3c-fe42a819be04/Granitos.jpg" alt="Granitos">
                     <div class="material-overlay">
                         <h3>Granitos</h3>
                         <p>Resistência e versatilidade para diversas aplicações.</p>
@@ -583,7 +638,7 @@
                     </div>
                 </div>
                 <div class="material-card">
-                    <img src="https://images.unsplash.com/photo-1556911223-e1539266bda7?auto=format&fit=crop&w=800&q=80" alt="Quartzo">
+                    <img src="/__l5e/assets-v1/ab27e2a8-5fa0-4a6d-a07b-f7143e5a1447/Quartzo.webp" alt="Quartzo">
                     <div class="material-overlay">
                         <h3>Quartzo</h3>
                         <p>Inovação e cores sólidas para projetos modernos.</p>
@@ -648,9 +703,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/5535999035588" class="whatsapp-float" target="_blank">
-        <img src="/__l5e/assets-v1/36773e5e-b45c-46f0-8067-3ae192dc1f9d/whatsapp_official.svg" alt="WhatsApp">
-    </a>
+    <a href="https://wa.me/5535999035588" class="whatsapp-float" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
     <script>
         // Header Scroll Effect
@@ -664,18 +717,29 @@
         });
 
         // Mobile Menu
-        const toggle = document.getElementById('mobile-toggle');
+        const toggleBtn = document.getElementById('mobile-toggle');
         const mobileNav = document.getElementById('mobile-nav');
         const overlay = document.getElementById('overlay');
 
-        toggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+        }
 
-        overlay.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            overlay.classList.remove('active');
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+            });
         });
 
         // Smooth Appearance on Scroll (Simple version)
